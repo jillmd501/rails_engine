@@ -20,11 +20,26 @@ namespace :data do
       Customer.create(row.to_hash)
     end
 
-    invoice_items_data = File.read("#{Rails.root}/lib/assets/invoice_items.csv")
-    invoice_items_csv  = CSV.parse(invoice_items_data, headers: true)
+    items_data = File.read("#{Rails.root}/lib/assets/items.csv")
+    items_csv  = CSV.parse(items_data, headers: true)
 
-    invoice_items_csv.each do |row|
-      InvoiceItem.create(row.to_hash)
+    items_csv.each do |row|
+      Item.create(row.to_hash)
+    end
+    
+    merchants_data = File.read("#{Rails.root}/lib/assets/merchants.csv")
+    merchants_csv  = CSV.parse(merchants_data, headers: true)
+
+    merchants_csv.each do |row|
+      Merchant.create(row.to_hash)
+    end
+
+
+    transactions_data = File.read("#{Rails.root}/lib/assets/transactions.csv")
+    transactions_csv  = CSV.parse(transactions_data, headers: true)
+
+    transactions_csv.each do |row|
+      Transaction.create(row.to_hash)
     end
 
     invoices_data = File.read("#{Rails.root}/lib/assets/invoices.csv")
@@ -34,18 +49,11 @@ namespace :data do
       Invoice.create(row.to_hash)
     end
 
-    merchants_data = File.read("#{Rails.root}/lib/assets/merchants.csv")
-    merchants_csv  = CSV.parse(merchants_data, headers: true)
+    invoice_items_data = File.read("#{Rails.root}/lib/assets/invoice_items.csv")
+    invoice_items_csv  = CSV.parse(invoice_items_data, headers: true)
 
-    merchants_csv.each do |row|
-      Merchant.create(row.to_hash)
-    end
-
-    transactions_data = File.read("#{Rails.root}/lib/assets/transactions.csv")
-    transactions_csv  = CSV.parse(transactions_data, headers: true)
-
-    transactions_csv.each do |row|
-      Transaction.create(row.to_hash)
+    invoice_items_csv.each do |row|
+      InvoiceItem.create(row.to_hash)
     end
   end
 end

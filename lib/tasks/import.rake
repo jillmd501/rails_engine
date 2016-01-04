@@ -20,13 +20,6 @@ namespace :data do
       Customer.create(row.to_hash)
     end
 
-    items_data = File.read("#{Rails.root}/lib/assets/items.csv")
-    items_csv  = CSV.parse(items_data, headers: true)
-
-    items_csv.each do |row|
-      Item.create(row.to_hash)
-    end
-    
     merchants_data = File.read("#{Rails.root}/lib/assets/merchants.csv")
     merchants_csv  = CSV.parse(merchants_data, headers: true)
 
@@ -34,7 +27,13 @@ namespace :data do
       Merchant.create(row.to_hash)
     end
 
+    items_data = File.read("#{Rails.root}/lib/assets/items.csv")
+    items_csv  = CSV.parse(items_data, headers: true)
 
+    items_csv.each do |row|
+      Item.create(row.to_hash)
+    end
+    
     transactions_data = File.read("#{Rails.root}/lib/assets/transactions.csv")
     transactions_csv  = CSV.parse(transactions_data, headers: true)
 

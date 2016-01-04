@@ -7,6 +7,7 @@ class CreateTransactions < ActiveRecord::Migration
       t.string :result
       t.datetime :created_at
       t.datetime :updated_at
+      t.belongs_to :invoices, index: true, foreign_key: true
     end
   end
 end

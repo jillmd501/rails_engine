@@ -3,7 +3,6 @@ require 'test_helper'
 class Api::V1::ItemsControllerTest < ActionController::TestCase
 
   test "item's name can be looked up" do
-    skip
     item = Item.first
     get :find, name: item.name, format: :json
 
@@ -56,9 +55,14 @@ class Api::V1::ItemsControllerTest < ActionController::TestCase
   end
 
   test 'find can return successfully' do
-    skip
     item = Item.first
     get :find, name: item.name, format: :json
+
+    assert_equal response.status, 200
+  end
+
+  test 'find all can return successfully' do
+    get :find_all, name: Item.first.name, format: :json
 
     assert_equal response.status, 200
   end

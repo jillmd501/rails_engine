@@ -57,4 +57,22 @@ class Api::V1::MerchantsControllerTest < ActionController::TestCase
 
     assert_equal response.status, 200
   end
+
+  test 'find all can return successfully' do
+    get :find_all, name: Merchant.first.name, format: :json
+
+    assert_equal response.status, 200
+  end
+
+  test 'returns associated items to merchant'
+
+  test "#items returns all items connected to merchant" do
+    merchant = Merchant.first
+    item = Item.first
+
+    get :items, id: merchant.id, format: :json
+
+    assert_response :success
+    assert_equal 2, json_response.count
+  end
 end

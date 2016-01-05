@@ -58,4 +58,11 @@ class Api::V1::CustomersControllerTest < ActionController::TestCase
 
     assert_equal response.status, 200
   end
+
+  test 'find all can return successfully' do
+    get :find_all, first_name: Customer.first.first_name, format: :json
+
+    assert_equal response.status, 200
+  end
+
 end

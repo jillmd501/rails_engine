@@ -59,4 +59,10 @@ class Api::V1::InvoicesControllerTest < ActionController::TestCase
 
     assert_equal response.status, 200
   end
+
+  test 'find all can return successfully' do
+    get :find_all, status: Invoice.first.status, format: :json
+
+    assert_equal response.status, 200
+  end
 end

@@ -26,7 +26,7 @@ class Api::V1::ItemsController < ApplicationController
   private
 
   def detect_lookup_param
-    params.keys.detect { |key| Invoice.attribute_names.include?(key) }.to_sym
+    params.keys.detect { |key| Item.attribute_names.include?(key) }.to_sym
   end
 
 end

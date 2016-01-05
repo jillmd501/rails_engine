@@ -19,6 +19,10 @@ class Api::V1::CustomersController < ApplicationController
     respond_with Customer.find_by(param => params[param])
   end
 
+  def random
+    respond_with Customer.order("RANDOM()").first
+  end
+
   private
 
   def detect_lookup_param

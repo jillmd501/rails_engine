@@ -19,6 +19,10 @@ class Api::V1::MerchantsController < ApplicationController
     respond_with Merchant.find_by(param => params[param])
   end
 
+  def random
+    respond_with Merchant.order("RANDOM()").first
+  end
+
   private
 
   def detect_lookup_param

@@ -19,6 +19,10 @@ class Api::V1::InvoicesController < ApplicationController
     respond_with Invoice.find_by(param => params[param])
   end
 
+  def random
+    respond_with Invoice.order("RANDOM()").first
+  end
+
   private
 
   def detect_lookup_param

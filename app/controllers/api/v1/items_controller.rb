@@ -18,7 +18,11 @@ class Api::V1::ItemsController < ApplicationController
     param = detect_lookup_param
     respond_with Item.find_by(param => params[param])
   end
-  
+
+  def random
+    respond_with Item.order("RANDOM()").first
+  end
+
   private
 
   def detect_lookup_param

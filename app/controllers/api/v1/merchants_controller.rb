@@ -10,13 +10,11 @@ class Api::V1::MerchantsController < ApplicationController
   end
 
   def find_all
-    param = detect_lookup_param
-    respond_with Merchant.where(param => params[param])
+    respond_with Merchant.where(find_params).all
   end
 
   def find
-    param = detect_lookup_param
-    respond_with Merchant.find_by(param => params[param])
+    respond_with Merchant.find_by(find_params)
   end
 
   def random
@@ -32,10 +30,6 @@ class Api::V1::MerchantsController < ApplicationController
   end
 
   private
-
-  def detect_lookup_param
-    params.keys.detect { |key| Merchant.attribute_names.include?(key) }.to_sym
-  end
 
   def find_params
    params.permit(:id, :name, :created_at, :updated_at)

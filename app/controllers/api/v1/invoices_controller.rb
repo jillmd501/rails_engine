@@ -10,22 +10,22 @@ class Api::V1::InvoicesController < ApplicationController
   end
 
   def find_all
-    param = detect_lookup_param
-    respond_with Invoice.where(param => params[param])
+    respond_with Invoice.where(find_params).all
   end
 
   def find
-    param = detect_lookup_param
-    respond_with Invoice.find_by(param => params[param])
+    respond_with Invoice.find_by(find_params)
   end
 
   def random
     respond_with Invoice.order("RANDOM()").first
   end
 
+
   private
 
-  def detect_lookup_param
-    params.keys.detect { |key| Invoice.attribute_names.include?(key) }.to_sym
+  def find_params
+   params.permit(:status, :merchant_id, :customer_id, :created_at, :updated_at)
   end
+
 end

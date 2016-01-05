@@ -10,13 +10,11 @@ class Api::V1::TransactionsController < ApplicationController
   end
 
   def find_all
-    param = detect_lookup_param
-    respond_with Transaction.where(param => params[param])
+    respond_with Transaction.where(find_params).all
   end
 
   def find
-    param = detect_lookup_param
-    respond_with Transaction.find_by(param => params[param])
+    respond_with Transaction.find_by(find_params)
   end
 
   def random
@@ -25,8 +23,9 @@ class Api::V1::TransactionsController < ApplicationController
 
   private
 
-  def detect_lookup_param
-    params.keys.detect { |key| Transaction.attribute_names.include?(key) }.to_sym
+
+  def find_params
+   params.permit(:id, :credit_card_number, :invoice_id, :result, :created_at, :updated_at)
   end
 
 end

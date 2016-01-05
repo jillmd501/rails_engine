@@ -10,13 +10,11 @@ class Api::V1::ItemsController < ApplicationController
   end
 
   def find_all
-    param = detect_lookup_param
-    respond_with Item.where(param => params[param])
+    respond_with Item.where(find_params).all
   end
 
   def find
-    param = detect_lookup_param
-    respond_with Item.find_by(param => params[param])
+    respond_with Item.find_by(find_params)
   end
 
   def random
@@ -25,8 +23,8 @@ class Api::V1::ItemsController < ApplicationController
 
   private
 
-  def detect_lookup_param
-    params.keys.detect { |key| Item.attribute_names.include?(key) }.to_sym
+  def find_params
+   params.permit(:description, :name, :unit_price, :merchant_id, :created_at, :updated_at)
   end
 
 end

@@ -33,19 +33,19 @@ namespace :data do
     items_csv.each do |row|
       Item.create(row.to_hash)
     end
-    
-    transactions_data = File.read("#{Rails.root}/lib/assets/transactions.csv")
-    transactions_csv  = CSV.parse(transactions_data, headers: true)
-
-    transactions_csv.each do |row|
-      Transaction.create(row.to_hash)
-    end
 
     invoices_data = File.read("#{Rails.root}/lib/assets/invoices.csv")
     invoices_csv  = CSV.parse(invoices_data, headers: true)
 
     invoices_csv.each do |row|
       Invoice.create(row.to_hash)
+    end
+
+    transactions_data = File.read("#{Rails.root}/lib/assets/transactions.csv")
+    transactions_csv  = CSV.parse(transactions_data, headers: true)
+
+    transactions_csv.each do |row|
+      Transaction.create(row.to_hash)
     end
 
     invoice_items_data = File.read("#{Rails.root}/lib/assets/invoice_items.csv")

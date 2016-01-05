@@ -10,9 +10,9 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'responders'
-gem 'rspec-rails'
 
 group :development, :test do
+  gem 'minitest-rails'
   gem 'pry'
   gem 'byebug'
 end

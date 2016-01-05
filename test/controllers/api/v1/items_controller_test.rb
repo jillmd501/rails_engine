@@ -1,16 +1,17 @@
 require 'test_helper'
 
-class Api::V1::MerchantsControllerTest < ActionController::TestCase
+class Api::V1::ItemsControllerTest < ActionController::TestCase
 
-  test "merchant's name can be looked up" do
-    merchant = Merchant.first
-    get :find, name: merchant.name, format: :json
+  test "item's name can be looked up" do
+    skip
+    item = Item.first
+    get :find, name: item.name, format: :json
 
-    assert_equal merchant.name, JSON.parse(response.body)["name"]
+    assert_equal item.name, JSON.parse(response.body)["name"]
   end
 
   test '#index responds to json' do
-    get :index, format: :json                              # or "api/v1/items"
+    get :index, format: :json
 
     assert_response :success
   end
@@ -25,7 +26,7 @@ class Api::V1::MerchantsControllerTest < ActionController::TestCase
   test '#index returns correct number of items' do
     get :index, format: :json
 
-    assert_equal Merchant.count, json_response.count
+    assert_equal Item.count, json_response.count
   end
 
   test '#index contains items that have the correct properties' do
@@ -33,27 +34,31 @@ class Api::V1::MerchantsControllerTest < ActionController::TestCase
     json_response.each do |item|
 
       assert item["name"]
+      assert item["description"]
+      assert item["merchant_id"]
+      assert item["unit_price"]
       assert item["created_at"]
       assert item["updated_at"]
     end
   end
 
   test '#show returns a particular item' do
-    merchant = Merchant.first
-    get :show, format: :json, id: merchant
+    item = Item.first
+    get :show, format: :json, id: item
 
     assert_response :success
   end
 
   test '#show returns the correct data type' do
-    get :show, format: :json, id: Merchant.first.id
+    get :show, format: :json, id: Item.first.id
 
     assert_kind_of Hash, json_response
   end
 
   test 'find can return successfully' do
-    merchant = Merchant.first
-    get :find, name: merchant.name, format: :json
+    skip
+    item = Item.first
+    get :find, name: item.name, format: :json
 
     assert_equal response.status, 200
   end

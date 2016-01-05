@@ -21,6 +21,18 @@ class Api::V1::InvoicesController < ApplicationController
     respond_with Invoice.order("RANDOM()").first
   end
 
+  def transactions
+    respond_with Invoice.find_by(find_params).transactions
+  end
+
+  def invoice_items
+    respond_with Invoice.find_by(find_params).invoice_items
+  end
+
+  def items
+    respond_with Invoice.find_by(find_params).items
+  end
+
 
   private
 

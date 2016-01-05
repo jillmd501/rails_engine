@@ -36,6 +36,12 @@ Rails.application.routes.draw do
           get :find_all
           get :random
         end
+
+        member do
+          get :transactions
+          get :invoice_items
+          get :items
+        end
       end
 
       resources :items, defaults: {format: :json} do

@@ -81,21 +81,4 @@ class Api::V1::MerchantsControllerTest < ActionController::TestCase
     assert_response :success
     assert_equal merchant.items.count, json_response.count
   end
-
-  test "#favorite_customer returns the favorite customer for a merchant" do
-    merchant = create(:merchant)
-    customer1 = create(:customer)
-    customer2 = create(:customer)
-    invoice1 = create(:invoice, customer_id: customer1.id, merchant_id: merchant.id)
-    invoice2 = create(:invoice, customer_id: customer1.id, merchant_id: merchant.id)
-    invoice3 = create(:invoice, customer_id: customer2.id, merchant_id: merchant.id)
-    create(:transaction, invoice_id: invoice1.id)
-    create(:transaction, invoice_id: invoice2.id)
-    create(:transaction, invoice_id: invoice3.id)
-
-    get :favorite_customer, id: merchant.id, format: :json
-
-    assert_response :success
-    assert_equal customer1.id, json_response["id"]
-  end
 end

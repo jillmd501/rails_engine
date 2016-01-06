@@ -65,4 +65,21 @@ class Api::V1::CustomersControllerTest < ActionController::TestCase
     assert_equal response.status, 200
   end
 
+  test 'returns associated invoices to customer' do
+    customer = Customer.first
+
+    get :invoices, id: customer.id, format: :json
+
+    assert_response :success
+    assert_equal customer.invoices.count, json_response.count
+  end
+
+  test 'returns associated transactions to customer' do
+    customer = Customer.first
+
+    get :invoices, id: customer.id, format: :json
+
+    assert_response :success
+    assert_equal customer.invoices.count, json_response.count
+  end
 end

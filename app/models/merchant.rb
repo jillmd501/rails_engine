@@ -16,7 +16,16 @@ class Merchant < ActiveRecord::Base
   end
 
   def customers_with_pending_invoices
-    invoices.unsuccessful.group(:customer_id).count
+    ids = invoices.unsuccessful.pluck(:customer_id).uniq
+    ids.map do |id|
+      Customer.find(id)
+    end
+  end
+
+  def most_revenue(params)
+
+    # revenue = invoices.successful.joins(:invoice_items).group(:merchant_id, ("invoice_items.quantity * invoice_items.unit_price")).count
+    # revenue.max_by(params|:quantity|.to_i){|id, quantity| quantity}
   end
 
 end

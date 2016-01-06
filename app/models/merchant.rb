@@ -22,10 +22,8 @@ class Merchant < ActiveRecord::Base
     end
   end
 
-  def most_revenue(params)
-
-    # revenue = invoices.successful.joins(:invoice_items).group(:merchant_id, ("invoice_items.quantity * invoice_items.unit_price")).count
-    # revenue.max_by(params|:quantity|.to_i){|id, quantity| quantity}
+  def self.total_revenue(params)
+    Invoice.successful.where(created_at: params[:date]).joins(:invoice_items).sum("invoice_items.quantity * invoice_items.unit_price")
   end
 
 end

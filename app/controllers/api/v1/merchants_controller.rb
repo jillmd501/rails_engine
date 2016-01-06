@@ -6,7 +6,7 @@ class Api::V1::MerchantsController < ApplicationController
   end
 
   def show
-    respond_with Merchant.find_by(id: params[:id])
+    respond_with Merchant.find(params[:id])
   end
 
   def find_all
@@ -22,11 +22,15 @@ class Api::V1::MerchantsController < ApplicationController
   end
 
   def invoices
-    respond_with Merchant.find_by(find_params).invoices
+    respond_with Merchant.find(params[:id]).invoices
   end
 
   def items
-    respond_with Merchant.find_by(find_params).items
+    respond_with Merchant.find(params[:id]).items
+  end
+
+  def total_revenue
+    Merchant.find(params[:id]).total_revenue
   end
 
   private

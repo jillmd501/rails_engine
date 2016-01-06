@@ -64,7 +64,14 @@ class Api::V1::MerchantsControllerTest < ActionController::TestCase
     assert_equal response.status, 200
   end
 
-  test 'returns associated items to merchant'
+  test 'returns associated invoices to merchant' do
+    merchant = Merchant.first
+
+    get :invoices, id: merchant.id, format: :json
+
+    assert_response :success
+    assert_equal merchant.invoices.count, json_response.count
+  end
 
   test "#items returns all items connected to merchant" do
     merchant = Merchant.first

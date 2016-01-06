@@ -66,4 +66,22 @@ class Api::V1::InvoiceItemsControllerTest < ActionController::TestCase
 
     assert_equal response.status, 200
   end
+
+  test 'returns associated invoices to invoice item' do
+    invoice_item = InvoiceItem.first
+
+    get :invoice, id: invoice_item.id, format: :json
+
+    assert_response :success
+    assert_equal 6, json_response.count
+  end
+
+  test 'returns associated item to invoice item' do
+    invoice_item = InvoiceItem.first
+
+    get :item, id: invoice_item.id, format: :json
+
+    assert_response :success
+    assert_equal 7, json_response.count
+  end
 end

@@ -10,7 +10,7 @@ class Api::V1::MerchantsControllerTest < ActionController::TestCase
   end
 
   test '#index responds to json' do
-    get :index, format: :json                              # or "api/v1/items"
+    get :index, format: :json
 
     assert_response :success
   end
@@ -68,11 +68,10 @@ class Api::V1::MerchantsControllerTest < ActionController::TestCase
 
   test "#items returns all items connected to merchant" do
     merchant = Merchant.first
-    item = Item.first
 
     get :items, id: merchant.id, format: :json
 
     assert_response :success
-    assert_equal 2, json_response.count
+    assert_equal merchant.items.count, json_response.count
   end
 end

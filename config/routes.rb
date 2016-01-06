@@ -6,6 +6,7 @@ Rails.application.routes.draw do
           get :find
           get :find_all
           get :random
+          get :most_revenue
         end
 
         member do
@@ -20,6 +21,11 @@ Rails.application.routes.draw do
           get :find_all
           get :random
         end
+
+        member do
+          get :invoices
+          get :transactions
+        end
       end
 
       resources :invoice_items, defaults: {format: :json} do
@@ -27,6 +33,11 @@ Rails.application.routes.draw do
           get :find
           get :find_all
           get :random
+        end
+
+        member do
+          get :invoice
+          get :item
         end
       end
 
@@ -41,6 +52,8 @@ Rails.application.routes.draw do
           get :transactions
           get :invoice_items
           get :items
+          get :merchant
+          get :customer
         end
       end
 
@@ -50,6 +63,11 @@ Rails.application.routes.draw do
           get :find_all
           get :random
         end
+
+        member do
+          get :merchant
+          get :invoice_items
+        end
       end
 
       resources :transactions, defaults: {format: :json} do
@@ -57,6 +75,10 @@ Rails.application.routes.draw do
           get :find
           get :find_all
           get :random
+        end
+
+        member do
+          get :invoice
         end
       end
     end

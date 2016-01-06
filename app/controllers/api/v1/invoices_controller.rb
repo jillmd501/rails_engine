@@ -22,22 +22,29 @@ class Api::V1::InvoicesController < ApplicationController
   end
 
   def transactions
-    respond_with Invoice.find_by(find_params).transactions
+    respond_with Invoice.find(params[:id]).transactions
   end
 
   def invoice_items
-    respond_with Invoice.find_by(find_params).invoice_items
+    respond_with Invoice.find(params[:id]).invoice_items
   end
 
   def items
-    respond_with Invoice.find_by(find_params).items
+    respond_with Invoice.find(params[:id]).items
   end
 
+  def customer
+    respond_with Invoice.find(params[:id]).customer
+  end
+
+  def merchant
+    respond_with Invoice.find(params[:id]).merchant
+  end
 
   private
 
   def find_params
-   params.permit(:status, :merchant_id, :customer_id, :created_at, :updated_at)
+   params.permit(:id, :status, :merchant_id, :unit_price, :customer_id, :created_at, :updated_at)
   end
 
 end

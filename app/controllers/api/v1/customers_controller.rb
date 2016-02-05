@@ -10,18 +10,32 @@ class Api::V1::CustomersController < ApplicationController
   end
 
   def find_all
-    param = detect_lookup_param
-    respond_with Customer.where(param => params[param])
+    respond_with Customer.where(find_params).all
   end
 
   def find
-    param = detect_lookup_param
-    respond_with Customer.find_by(param => params[param])
+    respond_with Customer.find_by(find_params)
+  end
+
+  def random
+    respond_with Customer.order("RANDOM()").first
+  end
+
+  def invoices
+    respond_with Customer.find(params[:id]).invoices
+  end
+
+  def transactions
+    respond_with Customer.find(params[:id]).transactions
+  end
+
+  def favorite_merchant
+    respond_with Customer.find(params[:id]).favorite_merchant
   end
 
   private
 
-  def detect_lookup_param
-    params.keys.detect { |key| Customer.attribute_names.include?(key) }.to_sym
+  def find_params
+   params.permit(:id, :last_name, :first_name, :created_at, :updated_at)
   end
 end

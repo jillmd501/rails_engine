@@ -45,7 +45,7 @@ namespace :data do
     transactions_csv  = CSV.parse(transactions_data, headers: true)
 
     transactions_csv.each do |row|
-      Transaction.create(row.to_hash)
+      Transaction.create(row.to_hash.except!("credit_card_expiration_date"))
     end
 
     invoice_items_data = File.read("#{Rails.root}/lib/assets/invoice_items.csv")
